@@ -24,6 +24,10 @@ module.exports = {
     open: true,
   },
 
+  resolve: {
+      extensions: ['.ts', '.tsx', '.js', '.json'],
+  },
+
   module: {
     rules: [
       {

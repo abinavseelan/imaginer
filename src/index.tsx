@@ -1,10 +1,26 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-class App extends React.PureComponent<{}, {}> {
+import {
+  Column,
+  GlobalStyle,
+  MainContainer,
+} from './styles';
+
+class App extends React.PureComponent<any, any> {
   public render() {
     return (
-      <p>Hello World!</p>
+      <div>
+        <GlobalStyle />
+        <MainContainer>
+          <Column vCenter hCenter>
+            Left
+          </Column>
+          <Column vCenter hCenter>
+            Right
+          </Column>
+        </MainContainer>
+      </div>
     );
   }
 }

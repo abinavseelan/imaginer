@@ -1,3 +1,8 @@
+# Build
+dist
+node_modules
+.awcache
+
 # Logs
 logs
 *.log
