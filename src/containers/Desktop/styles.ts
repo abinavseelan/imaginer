@@ -19,11 +19,21 @@ export const ControlCenter = Styled.div`
   flex-direction: column;
 `;
 
-export const Canvas = Styled.canvas`
+export const DrawArea = Styled.div`
   flex: 5;
   height: 100vh;
+  margin: ${themeConstants.spacing.xxLarge};
 
   background-color: ${themeConstants.colors.background.alternate};
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  div {
+    transition: width 0.15s ease-out;
+    transition: height 0.15s ease-out;
+  }
 `;
 
 export const ControlCenterOptions = Styled.div`
@@ -79,7 +89,7 @@ export const LeftInfo = Styled.div`
 export const ColorSquare = Styled.div`
   width: 16px;
   height: 16px;
-  ${(props: any) => `
+  ${(props: { color: string }) => `
     background-color: ${props.color};
   `}
 `;
