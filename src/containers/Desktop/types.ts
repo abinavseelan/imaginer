@@ -5,13 +5,3 @@ export interface IDesktopState {
   color: string;
   height: string;
 }
-
-export enum Dimension {
-  width = 'width',
-  height = 'height',
-}
-
-export interface IDimensions {
-  width: number;
-  height: number;
-}
