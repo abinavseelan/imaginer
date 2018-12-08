@@ -56,23 +56,18 @@ export const DrawArea = Styled.div`
 export const ControlCenter = Styled.div`
   flex: 3;
   background-color: ${themeConstants.colors.background.primary};
-  display: flex;
   color: ${themeConstants.colors.text.primary};
+
+  max-width: 100vw;
 `;
 
 export const PaginationButton = Styled.div`
-  flex: 1;
-
   display: flex;
   align-items: center;
   justify-content: center;
 
-  color: ${themeConstants.colors.text.alternate};
-`;
-
-export const ControlWrapper = Styled.div`
-  flex: 6;
-  padding: ${themeConstants.spacing.medium};
+  color: ${themeConstants.colors.text.primary};
+  font-size: ${themeConstants.fontSize.large};
 `;
 
 export const DownloadCTA = Styled.div`
@@ -112,4 +107,42 @@ export const ColorSquare = Styled.div`
 export const ClickableText = Styled.div`
   cursor: pointer;
   padding: 0 ${themeConstants.spacing.large};
+`;
+
+export const PaginationIndicators = Styled.div`
+  padding: ${themeConstants.spacing.medium};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  div {
+    border-radius: 50%;
+    height: 8px;
+    width: 8px;
+    border: 1px solid ${themeConstants.colors.border.default};
+    background-color: transparent;
+    margin: 0 ${themeConstants.spacing.small};
+
+    transition: all 0.15s ease-out;
+
+    &.current {
+      background-color: ${themeConstants.colors.background.alternate};
+    }
+  }
+`;
+
+export const ControlWrapper = Styled.div`
+  padding: ${themeConstants.spacing.medium};
+`;
+
+export const ActionControls = Styled.div`
+  display: flex;
+
+  ${PaginationButton} {
+    flex: 1;
+  }
+
+  ${ControlWrapper} {
+    flex: 4;
+  }
 `;

@@ -3,6 +3,7 @@ import React from 'react';
 import { IMobileProps, IMobileState } from './types';
 
 import {
+  ActionControls,
   ClickableText,
   ColorSquare,
   ControlCenter,
@@ -13,6 +14,7 @@ import {
   LeftInfo,
   MainContainer,
   PaginationButton,
+  PaginationIndicators,
   RightInfo,
 } from './styles';
 
@@ -204,25 +206,40 @@ class Mobile extends React.PureComponent<IMobileProps, IMobileState> {
           <div style={this.getPreviewStyles()} />
         </DrawArea>
         <ControlCenter>
-          {
-            this.state.pagination !== 0
-              ? (
-                <PaginationButton onClick={() => this.paginate('prev')}>{'<'}</PaginationButton>
-              )
-              : <PaginationButton />
-          }
-          <ControlWrapper>
-            {this.renderControl(this.state.pagination)}
-          </ControlWrapper>
-          {
-            this.state.pagination !== 3
-              ? (
-                <PaginationButton onClick={() => this.paginate('next')}>{'>'}</PaginationButton>
-              )
-              : null
-          }
+          <ActionControls>
+            {
+              this.state.pagination !== 0
+                ? (
+                  <PaginationButton onClick={() => this.paginate('prev')}>
+                    &lsaquo;
+                  </PaginationButton>
+                )
+                : <PaginationButton />
+            }
+            <ControlWrapper>
+              {this.renderControl(this.state.pagination)}
+            </ControlWrapper>
+            {
+              this.state.pagination !== 3
+                ? (
+                  <PaginationButton onClick={() => this.paginate('next')}>
+                    &rsaquo;
+                  </PaginationButton>
+                )
+                : <PaginationButton />
+            }
+          </ActionControls>
+          <PaginationIndicators>
+            {
+              [1, 2, 3, 4].map((_, index) => (
+                <div key={index} className={index === this.state.pagination ? 'current' : ''} />
+              ))
+            }
+          </PaginationIndicators>
         </ControlCenter>
-        <DownloadCTA>Download</DownloadCTA>
+        <DownloadCTA onClick={this.downloadImage}>
+          Download
+        </DownloadCTA>
       </MainContainer>
     );
   }
