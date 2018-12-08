@@ -94,3 +94,8 @@ export const ColorSquare = Styled.div`
     background-color: ${props.color};
   `}
 `;
+
+export const ClickableText = Styled.div`
+  cursor: pointer;
+  padding: 0 ${themeConstants.spacing.large};
+`;

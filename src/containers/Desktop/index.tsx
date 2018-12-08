@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {
+  ClickableText,
   ColorSquare,
   ControlCenter,
   ControlCenterOptions,
@@ -17,7 +18,7 @@ import { IDesktopProps, IDesktopState } from './types';
 import TextInput from 'Components/TextInput';
 import Dropdown from 'Components/Dropdown';
 
-import { themeConstants } from 'Src/shared/styles';
+import { ColorList, themeConstants } from 'Src/shared/styles';
 import downloader from 'Src/shared/utils/downloader';
 import getPreviewStyles from 'Src/shared/utils/getPreviewStyles';
 
@@ -94,6 +95,15 @@ class Desktop extends React.PureComponent<IDesktopProps, IDesktopState> {
     });
   }
 
+  public randomizeColor = () => {
+    const length = ColorList.length;
+    const randomValue = Math.floor(Math.random() * length);
+
+    this.setState({
+      color: ColorList[randomValue],
+    });
+  }
+
   public render() {
     return (
       <MainContainer>
@@ -134,6 +144,7 @@ class Desktop extends React.PureComponent<IDesktopProps, IDesktopState> {
                       <ColorSquare color={this.state.color}/>
                     </LeftInfo>
                 }
+                right={<ClickableText onClick={this.randomizeColor}>Randomize!</ClickableText>}
                 value={this.state.color}
                 onChange={this.handleInput}
               />
