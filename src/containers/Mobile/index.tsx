@@ -1,9 +1,29 @@
 import React from 'react';
 
-class Mobile extends React.PureComponent<{}, {}> {
+import { IMobileProps, IMobileState } from './types';
+
+import {
+  ControlCenter,
+  DownloadCTA,
+  DrawArea,
+  Header,
+  MainContainer,
+} from './styles';
+
+class Mobile extends React.PureComponent<IMobileProps, IMobileState> {
   public render() {
     return (
-      <p>Mobile</p>
+      <MainContainer>
+        <Header>
+          <h1>Imaginer.</h1>
+          <h2>Download custom sized images</h2>
+        </Header>
+        <DrawArea>
+          <div />
+        </DrawArea>
+        <ControlCenter />
+        <DownloadCTA>Download</DownloadCTA>
+      </MainContainer>
     );
   }
 }
