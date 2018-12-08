@@ -100,6 +100,29 @@ class Desktop extends React.PureComponent<IDesktopProps, IDesktopState> {
     };
   }
 
+  public downloadImage = () => {
+    const { width, height, color } = this.state;
+
+    const canvas = document.createElement('canvas');
+    canvas.width = Number(width);
+    canvas.height = Number(height);
+    const ctx = canvas.getContext('2d');
+
+    if (ctx) {
+      ctx.fillStyle = color;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+
+    const url = canvas.toDataURL();
+
+    const a = document.createElement('a');
+    a.download = `${width}x${height}.png`;
+    a.href = url;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
   public handleInput = (e: React.SyntheticEvent)  => {
     const { target } = e;
 
@@ -159,7 +182,9 @@ class Desktop extends React.PureComponent<IDesktopProps, IDesktopState> {
               />
             </Controls>
           </ControlCenterOptions>
-          <DownloadCTA>
+          <DownloadCTA
+            onClick={this.downloadImage}
+          >
             Download
           </DownloadCTA>
         </ControlCenter>
