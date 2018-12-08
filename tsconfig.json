@@ -17,7 +17,11 @@
         "allowSyntheticDefaultImports": true,
         "baseUrl": "./",
         "moduleResolution": "node",
-        "paths": {}
+        "paths": {
+          "Src/*": ["src/*"],
+          "Components/*": ["src/components/*"],
+          "Containers/*": ["src/containers/*"],
+        }
     },
     "include": [
         "./src/**/*",

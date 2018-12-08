@@ -25,7 +25,12 @@ module.exports = {
   },
 
   resolve: {
-      extensions: ['.ts', '.tsx', '.js', '.json'],
+    extensions: ['.ts', '.tsx', '.js', '.json'],
+     alias: {
+      Src: path.resolve('./src'),
+      Components: path.resolve('./src', 'components'),
+      Containers: path.resolve('./client', 'containers'),
+     }
   },
 
   module: {
