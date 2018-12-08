@@ -4,7 +4,9 @@
   "description": "Easy image creation tool",
   "main": "-",
   "scripts": {
-    "start:dev": "webpack-dev-server --config ./webpack/development.js --progress"
+    "start:dev": "webpack-dev-server --config ./webpack/development.js --progress",
+    "build": "webpack --config ./webpack/production.js",
+    "analyze": "ANALYZE=true webpack --config ./webpack/production.js"
   },
   "repository": {
     "type": "git",
@@ -41,6 +43,7 @@
     "tslint-react": "^3.6.0",
     "typescript": "^3.2.2",
     "webpack": "^4.27.1",
+    "webpack-bundle-analyzer": "^3.0.3",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"
   },
