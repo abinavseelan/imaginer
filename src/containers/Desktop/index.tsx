@@ -13,9 +13,9 @@ import {
 } from './styles';
 
 import { IDesktopProps, IDesktopState } from './types';
-import { Dimension, IDimensions } from 'Src/shared/types';
 
 import TextInput from 'Components/TextInput';
+import Dropdown from 'Components/Dropdown';
 
 import { themeConstants } from 'Src/shared/styles';
 import downloader from 'Src/shared/utils/downloader';
@@ -29,6 +29,7 @@ class Desktop extends React.PureComponent<IDesktopProps, IDesktopState> {
 
     this.state = {
       color: themeConstants.colors.buttons.primary,
+      format: '.png',
       height: '400',
       width: '400',
     };
@@ -38,7 +39,7 @@ class Desktop extends React.PureComponent<IDesktopProps, IDesktopState> {
 
   public getPreviewStyles = () => {
     const drawArea = this.drawArea && this.drawArea.current || null;
-    const { height, width, color } = this.state;
+    const { height, width, color, format } = this.state;
 
     if (!drawArea) {
       return {
@@ -48,12 +49,22 @@ class Desktop extends React.PureComponent<IDesktopProps, IDesktopState> {
       };
     }
 
-    return getPreviewStyles(drawArea, Number(width), Number(height), color);
+    return getPreviewStyles(drawArea, {
+      color,
+      format,
+      height: Number(height),
+      width: Number(width),
+    });
   }
 
   public downloadImage = () => {
-    const { width, height, color } = this.state;
-    downloader(Number(width), Number(height), color);
+    const { width, height, color, format } = this.state;
+    downloader({
+      color,
+      format,
+      height: Number(height),
+      width: Number(width),
+    });
   }
 
   public handleInput = (e: React.SyntheticEvent)  => {
@@ -73,6 +84,16 @@ class Desktop extends React.PureComponent<IDesktopProps, IDesktopState> {
     this.setState(newState);
   }
 
+  public handleFormatSelection = (option: string) => {
+    if (!option) {
+      return;
+    }
+
+    this.setState({
+      format: option,
+    });
+  }
+
   public render() {
     return (
       <MainContainer>
@@ -87,6 +108,7 @@ class Desktop extends React.PureComponent<IDesktopProps, IDesktopState> {
 
             <Controls>
               <TextInput
+                type='number'
                 label='Width'
                 name='width'
                 right={<RightInfo>px</RightInfo>}
@@ -95,6 +117,7 @@ class Desktop extends React.PureComponent<IDesktopProps, IDesktopState> {
               />
 
               <TextInput
+                type='number'
                 label='Height'
                 name='height'
                 right={<RightInfo>px</RightInfo>}
@@ -103,6 +126,7 @@ class Desktop extends React.PureComponent<IDesktopProps, IDesktopState> {
               />
 
               <TextInput
+                type='text'
                 label='Color'
                 name='color'
                 left={
@@ -112,6 +136,16 @@ class Desktop extends React.PureComponent<IDesktopProps, IDesktopState> {
                 }
                 value={this.state.color}
                 onChange={this.handleInput}
+              />
+
+              <Dropdown
+                label='Format'
+                value={this.state.format}
+                values={[
+                  { id: 'png', label: '.png' },
+                  { id: 'jpg', label: '.jpg' },
+                ]}
+                onChange={this.handleFormatSelection}
               />
             </Controls>
           </ControlCenterOptions>

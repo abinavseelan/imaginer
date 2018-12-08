@@ -1,4 +1,4 @@
-import { Dimension, IDimensions } from 'Src/shared/types';
+import { Dimension, IDimensions, IImageMeta } from 'Src/shared/types';
 
 function constrain(type: Dimension, dimensions: IDimensions, maxDimensions: IDimensions) {
   const { width, height } = dimensions;
@@ -20,15 +20,10 @@ function constrain(type: Dimension, dimensions: IDimensions, maxDimensions: IDim
   return { width, height };
 }
 
-export default function getPreviewStyles(
-  element: HTMLDivElement,
-  width: number,
-  height: number,
-  color: string,
-) {
+export default function getPreviewStyles(element: HTMLDivElement, imageMeta: IImageMeta) {
   const { width: MAX_WIDTH, height: MAX_HEIGHT } = element.getBoundingClientRect();
-  let newWidth = width;
-  let newHeight = height;
+  let newWidth = imageMeta.width;
+  let newHeight = imageMeta.height;
 
   if (newWidth > MAX_WIDTH) {
     const widthConstrained = constrain(Dimension.width, {
@@ -55,7 +50,7 @@ export default function getPreviewStyles(
   }
 
   return {
-    backgroundColor: color,
+    backgroundColor: imageMeta.color,
     height: `${newHeight}px`,
     width: `${newWidth}px`,
   };

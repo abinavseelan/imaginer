@@ -33,6 +33,7 @@ export const DrawArea = Styled.div`
   div {
     transition: width 0.15s ease-out;
     transition: height 0.15s ease-out;
+    will-change: height, width;
   }
 `;
 

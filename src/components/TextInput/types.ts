@@ -5,4 +5,5 @@ export interface ITextInputProps {
   value: string;
   onChange: (e: React.SyntheticEvent) => void;
   right?: React.ReactNode;
+  type: string;
 }
