@@ -27,6 +27,7 @@ export const MenuWrapper = Styled.div`
   position: absolute;
   right: 0;
   border: 2px solid ${themeConstants.colors.border.default};
+  background-color: ${themeConstants.colors.background.primary};
   padding: ${themeConstants.spacing.medium};
 
   transition: all 0.15s ease-out;
