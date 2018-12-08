@@ -2,7 +2,9 @@ import React from 'react';
 
 import { InputWrapper, Wrapper } from './styles';
 
-const TextInput = (props: any) => {
+import { ITextInputProps } from './types';
+
+const TextInput = (props: ITextInputProps) => {
   return (
     <Wrapper>
       <label>{props.label}</label>

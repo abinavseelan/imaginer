@@ -12,14 +12,24 @@ import {
   RightInfo,
 } from './styles';
 
+import { IDesktopProps, IDesktopState } from './types';
+
 import TextInput from 'Components/TextInput';
 
-class Desktop extends React.PureComponent<{}, {}> {
-  public state = {
-    color: '',
-    height: '',
-    width: '',
-  };
+class Desktop extends React.PureComponent<IDesktopProps, IDesktopState> {
+  public canvas: React.ReactNode;
+
+  constructor(props: any) {
+    super(props);
+
+    this.state = {
+      color: '',
+      height: '',
+      width: '',
+    };
+
+    this.canvas = React.createRef();
+  }
 
   public handleInput = (e: React.SyntheticEvent)  => {
     const { target } = e;
@@ -30,9 +40,12 @@ class Desktop extends React.PureComponent<{}, {}> {
 
     const { name, value } = target as HTMLInputElement;
 
-    this.setState({
+    const newState: IDesktopState = {
+      ...this.state,
       [name]: value,
-    });
+    };
+
+    this.setState(newState);
   }
 
   public render() {
@@ -81,7 +94,7 @@ class Desktop extends React.PureComponent<{}, {}> {
             Download
           </DownloadCTA>
         </ControlCenter>
-        <Canvas />
+        <Canvas id='canvas'/>
       </MainContainer>
     );
   }
