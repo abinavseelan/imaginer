@@ -21,7 +21,7 @@ export const ControlCenter = Styled.div`
 
 export const DrawArea = Styled.div`
   flex: 5;
-  height: 100vh;
+  max-height: 100vh;
   margin: ${themeConstants.spacing.xxLarge};
 
   background-color: ${themeConstants.colors.background.alternate};

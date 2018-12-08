@@ -12,7 +12,7 @@ import {
   RightInfo,
 } from './styles';
 
-import { IDesktopProps, IDesktopState } from './types';
+import { Dimension, IDesktopProps, IDesktopState, IDimensions } from './types';
 
 import TextInput from 'Components/TextInput';
 
@@ -33,38 +33,68 @@ class Desktop extends React.PureComponent<IDesktopProps, IDesktopState> {
     this.drawArea = React.createRef();
   }
 
+  public constrain = (type: Dimension, dimensions: IDimensions, maxDimensions: IDimensions) => {
+    const { width, height } = dimensions;
+    const { width: maxWidth, height: maxHeight } = maxDimensions;
+    const aspectRatio = width / height;
+
+    if (type === Dimension.width && width > maxWidth) {
+      return {
+        height: maxWidth / aspectRatio,
+        width: maxWidth,
+      };
+    }
+    if ( type === Dimension.height && height > maxHeight) {
+      return {
+        height: maxHeight,
+        width: maxHeight * aspectRatio,
+      };
+    }
+    return { width, height };
+  }
+
   public getPreviewStyles = () => {
     const drawArea = this.drawArea && this.drawArea.current || null;
-
     const { height, width, color } = this.state;
 
-    const styles = {
-      backgroundColor: color,
-      height: `${height}px`,
-      width: `${width}px`,
-    };
-
     if (!drawArea) {
-      return styles;
+      return {
+        backgroundColor: color,
+        height: `${height}px`,
+        width: `${width}px`,
+      };
     }
 
     const { width: MAX_WIDTH, height: MAX_HEIGHT } = drawArea.getBoundingClientRect();
-
-    let newHeight = Number(height);
-    let newWidth = Number(width);
+    let newWidth = parseInt(width, 10);
+    let newHeight = parseInt(height, 10);
 
     if (newWidth > MAX_WIDTH) {
-      newHeight = (newHeight * MAX_WIDTH) / newWidth;
-      newWidth = MAX_WIDTH;
+      const widthConstrained = this.constrain(Dimension.width, {
+        height: newHeight,
+        width: newWidth,
+      }, {
+        height: MAX_HEIGHT,
+        width: MAX_WIDTH,
+      });
+      newWidth = widthConstrained.width;
+      newHeight = widthConstrained.height;
     }
 
     if (newHeight > MAX_HEIGHT) {
-      newHeight = MAX_HEIGHT;
-      newWidth = (newWidth * MAX_HEIGHT) / newHeight;
+      const heightConstrained = this.constrain(Dimension.height, {
+        height: newHeight,
+        width: newWidth,
+      }, {
+        height: MAX_HEIGHT,
+        width: MAX_WIDTH,
+      });
+      newWidth = heightConstrained.width;
+      newHeight = heightConstrained.height;
     }
 
     return {
-      ...styles,
+      backgroundColor: color,
       height: `${newHeight}px`,
       width: `${newWidth}px`,
     };
