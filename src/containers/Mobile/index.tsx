@@ -11,11 +11,13 @@ import {
   DownloadCTA,
   DrawArea,
   Header,
+  Left,
   LeftInfo,
   MainContainer,
   PaginationButton,
   PaginationIndicators,
   RightInfo,
+  Top,
 } from './styles';
 
 import { ColorList, themeConstants } from 'Src/shared/styles';
@@ -203,7 +205,10 @@ class Mobile extends React.PureComponent<IMobileProps, IMobileState> {
           <h2>Download custom sized images</h2>
         </Header>
         <DrawArea ref={this.drawArea}>
-          <div style={this.getPreviewStyles()} />
+          <div style={this.getPreviewStyles()} className='preview'>
+            <Top>{this.state.width}px</Top>
+            <Left>{this.state.height}px</Left>
+          </div>
         </DrawArea>
         <ControlCenter>
           <ActionControls>

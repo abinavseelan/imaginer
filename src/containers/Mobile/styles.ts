@@ -37,7 +37,7 @@ export const Header = Styled.header`
 export const DrawArea = Styled.div`
   flex: 6;
 
-  margin: ${themeConstants.spacing.large};
+  margin: ${themeConstants.spacing.xxLarge};
   background-color: ${themeConstants.colors.background.alternate};
 
   display: flex;
@@ -46,11 +46,26 @@ export const DrawArea = Styled.div`
 
   max-width: 100vw;
 
-  div {
+  .preview {
     transition: width 0.15s ease-out;
     transition: height 0.15s ease-out;
     will-change: height, width;
+
+    position: relative;
   }
+`;
+
+export const Top = Styled.p`
+  position: absolute;
+  top: -50px;
+  left: 40%;
+`;
+
+export const Left = Styled.p`
+  position: absolute;
+  top: 40%;
+  left: -50px;
+  transform: rotate(-90deg);
 `;
 
 export const ControlCenter = Styled.div`
@@ -107,6 +122,9 @@ export const ColorSquare = Styled.div`
 export const ClickableText = Styled.div`
   cursor: pointer;
   padding: 0 ${themeConstants.spacing.large};
+
+  position: absolute;
+  right: 70px;
 `;
 
 export const PaginationIndicators = Styled.div`
@@ -137,9 +155,11 @@ export const ControlWrapper = Styled.div`
 
 export const ActionControls = Styled.div`
   display: flex;
+  max-width: 100vw;
 
   ${PaginationButton} {
     flex: 1;
+    main-width: 30px;
   }
 
   ${ControlWrapper} {
