@@ -202,7 +202,7 @@ class Mobile extends React.PureComponent<IMobileProps, IMobileState> {
           <h1>Imaginer.</h1>
           <h2>Download custom sized images</h2>
         </Header>
-        <DrawArea>
+        <DrawArea ref={this.drawArea}>
           <div style={this.getPreviewStyles()} />
         </DrawArea>
         <ControlCenter>
