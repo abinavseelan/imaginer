@@ -8,9 +8,11 @@ import {
   Controls,
   DownloadCTA,
   DrawArea,
+  Left,
   LeftInfo,
   MainContainer,
   RightInfo,
+  Top,
 } from './styles';
 
 import { IDesktopProps, IDesktopState } from './types';
@@ -167,7 +169,10 @@ class Desktop extends React.PureComponent<IDesktopProps, IDesktopState> {
           </DownloadCTA>
         </ControlCenter>
         <DrawArea ref={this.drawArea}>
-          <div style={this.getPreviewStyles()} />
+            <div style={this.getPreviewStyles()} className='preview'>
+              <Top>{this.state.width}px</Top>
+              <Left>{this.state.height}px</Left>
+            </div>
         </DrawArea>
       </MainContainer>
     );

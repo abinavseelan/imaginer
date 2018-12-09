@@ -30,11 +30,26 @@ export const DrawArea = Styled.div`
   justify-content: center;
   align-items: center;
 
-  div {
+  .preview {
     transition: width 0.15s ease-out;
     transition: height 0.15s ease-out;
     will-change: height, width;
+
+    position: relative;
   }
+`;
+
+export const Top = Styled.p`
+  position: absolute;
+  top: -50px;
+  left: 50%;
+`;
+
+export const Left = Styled.p`
+  position: absolute;
+  top: 50%;
+  left: -50px;
+  transform: rotate(-90deg);
 `;
 
 export const ControlCenterOptions = Styled.div`
